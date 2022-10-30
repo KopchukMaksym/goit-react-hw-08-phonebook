@@ -1,30 +1,21 @@
-import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { selectFiteredContacts } from 'redux/selectors';
-import ContactItem from './ContactItem';
 
-import s from './FormStyles.module.css';
+import ContactItem from './ContactItem';
+import { selectFiteredContacts } from 'redux/selectors';
+
+import s from '../ContactsComponents/ContactComponent.module.css';
 
 const ContactList = () => {
   const contacts = useSelector(selectFiteredContacts);
-
   if (!contacts.length) return <p>Not found contacts</p>;
   return (
     <ul className={s.list}>
+      <h2>{contacts.length === 1 ? `Contact :` : `Contacts :`}</h2>
       {contacts.map(contact => {
         return <ContactItem key={contact.id} contact={contact} />;
       })}
     </ul>
   );
 };
-export default ContactList;
 
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      phone: PropTypes.string.isRequired,
-    })
-  ),
-};
+export default ContactList;

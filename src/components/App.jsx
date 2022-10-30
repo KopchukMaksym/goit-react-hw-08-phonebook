@@ -1,30 +1,42 @@
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectContacts } from 'redux/selectors';
-import { getContactsThunk } from 'redux/contacts/thunk.contacts';
-import { ContactForm } from './ContactForm';
+import { lazy, Suspense } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { Header } from './Header/Header';
+import PrivateRoute from './Permission/PrivateRoute';
+import PublicRoute from './Permission/PublicRoute';
 
-import ContactList from './ContactList';
-import Filter from './Filter';
-
-import s from './FormStyles.module.css';
+const RegisterPage = lazy(() => import('pages/Register/RegisterPage'));
+const LoginPage = lazy(() => import('pages/Login/LoginPage'));
+const ContactsPage = lazy(() => import('pages/Contacts/ContactsPage'));
 
 export const App = () => {
-  const contacts = useSelector(selectContacts);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getContactsThunk());
-  }, [dispatch]);
-
   return (
-    <div className={s.section}>
-      <h1>Phonebook</h1>
-      <ContactForm />
+    <div>
+      <Header />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route
+            path="/register"
+            element={<PublicRoute redirectTo="/contacts" restricted />}
+          >
+            <Route path="/register" element={<RegisterPage />} />
+          </Route>
+          <Route
+            path="/login"
+            element={<PublicRoute redirectTo="/contacts" restricted />}
+          >
+            <Route path="/login" element={<LoginPage />} />
+          </Route>
 
-      <h2>Contacts</h2>
-      <Filter />
-      {!!contacts.length && <ContactList />}
+          <Route
+            exact
+            path="/contacts"
+            element={<PrivateRoute redirectTo="/login" />}
+          >
+            <Route exact path="/contacts" element={<ContactsPage />} />
+          </Route>
+          <Route path="*" element={<Navigate to={{ pathname: '/login' }} />} />
+        </Routes>
+      </Suspense>
     </div>
   );
 };

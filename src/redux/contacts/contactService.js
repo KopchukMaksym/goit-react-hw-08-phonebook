@@ -1,20 +1,28 @@
-import axios from 'axios';
-
-const postsApi = axios.create({
-  baseURL: 'https://63567ed1a2d1844a97762c40.mockapi.io/contacts',
-});
+import { privateApi } from 'api';
 
 export const getContactService = async () => {
-  const { data } = await postsApi.get('/contacts');
-  return data;
+  try {
+    const { data } = await privateApi.get('/contacts');
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const addContactService = async contact => {
-  const { data } = await postsApi.post('/contacts', contact);
-  return data;
+  try {
+    const { data } = await privateApi.post('/contacts', contact);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const deleteContactService = async id => {
-  const { data } = await postsApi.delete(`/contacts/${id}`);
-  return data;
+  try {
+    const { data } = await privateApi.delete(`/contacts/${id}`);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 };

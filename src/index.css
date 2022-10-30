@@ -13,3 +13,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+form {
+  box-sizing: border-box;
+  width: 350px;
+  margin: 50px auto;
+}
+
+.MuiTextField-root {
+  width: 100%;
+}
+
+.MuiSvgIcon-root {
+  margin-right: 14px;
+}

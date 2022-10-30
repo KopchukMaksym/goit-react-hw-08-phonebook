@@ -1,13 +1,20 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { addContact, deleteContact, fetchContacts } from './contactsActions';
+
+import { addContact, deleteContact, getContacts } from './contactsActions';
 import {
   addContactService,
   deleteContactService,
   getContactService,
 } from './contactService';
 
-export const getContactsThunk = createAsyncThunk(fetchContacts, () => {
-  return getContactService();
+export const getContactsThunk = createAsyncThunk(getContacts, (_, thunkApi) => {
+  const state = thunkApi.getState();
+  const token = state.auth.token;
+  if (token === null) {
+    return thunkApi.rejectWithValue();
+  } else {
+    return getContactService();
+  }
 });
 
 export const addContactsThunk = createAsyncThunk(addContact, contact => {

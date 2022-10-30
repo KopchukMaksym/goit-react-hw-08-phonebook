@@ -1,0 +1,13 @@
+.nav__Menu {
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
+  background-color: #1976d1;
+}
+
+.nav__Link {
+  text-decoration: none;
+  font-size: x-large;
+  font-weight: bold;
+  color: white;
+}

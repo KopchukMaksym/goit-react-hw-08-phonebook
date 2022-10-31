@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import ContactsForm from 'components/ContactsComponents/ContactsForm';
 import ContactList from 'components/ContactsComponents/ContactsList';
-import { selectContacts, selectTokenAuth } from 'redux/selectors';
+import {
+  selectContacts,
+  selectTokenAuth,
+  selectNameAuth,
+} from 'redux/selectors';
 import { token } from 'api';
 import { getContactsThunk } from 'redux/contacts/thunk.contacts';
 import Filter from 'components/Filter/Filter';
@@ -15,11 +19,16 @@ const ContactsPage = () => {
 
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
+  const name = useSelector(selectNameAuth);
 
   useEffect(() => {
     token.set(currentToken);
     dispatch(getContactsThunk());
-    dispatch(getInfoUserThunk());
+    if (name) {
+      return;
+    } else {
+      dispatch(getInfoUserThunk());
+    }
     // eslint-disable-next-line
   }, []);
 

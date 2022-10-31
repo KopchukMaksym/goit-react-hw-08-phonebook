@@ -9,13 +9,6 @@ const LoginPage = lazy(() => import('pages/Login/LoginPage'));
 const ContactsPage = lazy(() => import('pages/Contacts/ContactsPage'));
 
 export const App = () => {
-  // useEffect(() => {
-  //   if (!name.length) {
-  //     dispatch(getInfoUserThunk());
-  //   }
-  //   // eslint-disable-next-line
-  // }, []);
-
   return (
     <div>
       <Header />

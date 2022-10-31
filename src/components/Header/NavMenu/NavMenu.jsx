@@ -5,10 +5,21 @@ import s from '../NavMenu/NavMenu.module.css';
 const NavMenu = () => {
   return (
     <nav className={s.nav__Menu}>
-      <NavLink className={s.nav__Link} end to="/register">
+      <NavLink
+        end
+        className={({ isActive }) =>
+          [s.navLink, isActive && s.active].join(' ')
+        }
+        to="/register"
+      >
         Register
       </NavLink>
-      <NavLink className={s.nav__Link} to="/login">
+      <NavLink
+        className={({ isActive }) =>
+          [s.navLink, isActive && s.active].join(' ')
+        }
+        to="/login"
+      >
         Login
       </NavLink>
     </nav>

@@ -1,5 +1,5 @@
 import TextField from '@mui/material/TextField';
-// import * as React from 'react';
+
 import Button from '@mui/material/Button';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -7,8 +7,6 @@ import { getInfoUserThunk, loginUserThunk } from 'redux/auth/thunk.auth';
 
 import KeyIcon from '@mui/icons-material/Key';
 import EmailIcon from '@mui/icons-material/Email';
-
-import s from '../Login/LoginPage.module.css';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -35,7 +33,6 @@ const LoginPage = () => {
       }}
     >
       <TextField
-        className={s.text__Field}
         onChange={e => setEmail(e.target.value)}
         required
         id="Email-required"

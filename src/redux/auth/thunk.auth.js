@@ -18,7 +18,6 @@ export const createNewUserThunk = createAsyncThunk(createNewUser, user => {
 });
 
 export const loginUserThunk = createAsyncThunk(loginUser, async login => {
-  console.log(login);
   const data = await loginUserService(login);
   token.set(data.token);
   return data;

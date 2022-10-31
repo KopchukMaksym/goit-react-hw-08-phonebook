@@ -1,11 +1,10 @@
 import TextField from '@mui/material/TextField';
-// import * as React from 'react';
+
 import Button from '@mui/material/Button';
 import { useState } from 'react';
 import { createNewUserThunk } from 'redux/auth/thunk.auth';
 import { useDispatch } from 'react-redux';
 
-// import { Box, InputAdornment } from '@mui/material';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import EmailIcon from '@mui/icons-material/Email';
 import KeyIcon from '@mui/icons-material/Key';
@@ -16,10 +15,6 @@ const RegisterPage = () => {
   const [password, setPassword] = useState('');
 
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   console.log(name, email, password);
-  // }, [name, email, password]);
 
   const handleSubmit = e => {
     e.preventDefault();

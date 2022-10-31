@@ -7,5 +7,5 @@ export default function PrivateRoute({
   redirectTo = '/login',
 }) {
   const token = useSelector(selectTokenAuth);
-  return <>{!!token ? <Outlet /> : <Navigate to={redirectTo} />}</>;
+  return <>{token ? <Outlet /> : <Navigate to={redirectTo} />}</>;
 }

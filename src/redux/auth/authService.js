@@ -3,7 +3,6 @@ import { privateApi, publicApi, token } from 'api';
 export const createNewUserService = async user => {
   try {
     const { data } = await publicApi.post('/users/signup', user);
-    token.set(data.token);
     return data;
   } catch (error) {
     console.log(error);
@@ -13,7 +12,6 @@ export const createNewUserService = async user => {
 export const loginUserService = async login => {
   try {
     const { data } = await publicApi.post('/users/login', login);
-    token.set(data.token);
     return data;
   } catch (error) {
     console.log(error);

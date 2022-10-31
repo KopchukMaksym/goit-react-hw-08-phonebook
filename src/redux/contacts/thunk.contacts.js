@@ -6,15 +6,13 @@ import {
   deleteContactService,
   getContactService,
 } from './contactService';
+import { token } from 'api';
 
 export const getContactsThunk = createAsyncThunk(getContacts, (_, thunkApi) => {
   const state = thunkApi.getState();
-  const token = state.auth.token;
-  if (token === null) {
-    return thunkApi.rejectWithValue();
-  } else {
-    return getContactService();
-  }
+  const curentToken = state.auth.token;
+  token.set(curentToken);
+  return getContactService();
 });
 
 export const addContactsThunk = createAsyncThunk(addContact, contact => {

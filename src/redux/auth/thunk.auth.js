@@ -11,13 +11,17 @@ import {
   loginUserService,
   logOutUserService,
 } from './authService';
+import { token } from 'api';
 
 export const createNewUserThunk = createAsyncThunk(createNewUser, user => {
   return createNewUserService(user);
 });
 
-export const loginUserThunk = createAsyncThunk(loginUser, login => {
-  return loginUserService(login);
+export const loginUserThunk = createAsyncThunk(loginUser, async login => {
+  console.log(login);
+  const data = await loginUserService(login);
+  token.set(data.token);
+  return data;
 });
 
 export const getInfoUserThunk = createAsyncThunk(getInfoUser, (_, thunkApi) => {
